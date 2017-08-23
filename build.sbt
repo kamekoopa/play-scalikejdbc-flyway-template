@@ -1,25 +1,12 @@
-name := """play-scalikejdbc-flyway-template"""
-
-version := "1.0-SNAPSHOT"
-
-lazy val root = (project in file(".")).enablePlugins(PlayScala)
-
-scalaVersion := "2.11.7"
-
-libraryDependencies ++= Seq(
-  jdbc,
-  cache,
-  ws,
-  "com.h2database"         %  "h2"                           % "1.4.+", // your jdbc driver here
-  "org.scalikejdbc"        %% "scalikejdbc"                  % scalikejdbcVersion,
-  "org.scalikejdbc"        %% "scalikejdbc-config"           % scalikejdbcVersion,
-  "org.scalikejdbc"        %% "scalikejdbc-jsr310"           % scalikejdbcVersion,
-  "org.scalikejdbc"        %% "scalikejdbc-play-initializer" % scalikejdbcPlayVersion,
-  "org.flywaydb"           %% "flyway-play"                  % "3.0.1",
-  "org.scalikejdbc"        %% "scalikejdbc-test"             % scalikejdbcVersion  % Test,
-  "org.scalatestplus.play" %% "scalatestplus-play"           % "1.5.1"             % Test
-)
-
-lazy val scalikejdbcVersion = "2.4.+"
-
-lazy val scalikejdbcPlayVersion = "2.5.+"
+// This build is for this Giter8 template.
+// To test the template run `g8` or `g8Test` from the sbt session.
+// See http://www.foundweekends.org/giter8/testing.html#Using+the+Giter8Plugin for more details.
+lazy val root = (project in file(".")).
+  settings(
+    name := "play-scalikejdbc-flyway-template",
+    test in Test := {
+      val _ = (g8Test in Test).toTask("").value
+    },
+    scriptedLaunchOpts ++= List("-Xms1024m", "-Xmx1024m", "-XX:ReservedCodeCacheSize=128m", "-XX:MaxPermSize=256m", "-Xss2m", "-Dfile.encoding=UTF-8"),
+    resolvers += Resolver.url("typesafe", url("http://repo.typesafe.com/typesafe/ivy-releases/"))(Resolver.ivyStylePatterns)
+  )
